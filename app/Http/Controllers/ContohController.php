@@ -39,10 +39,30 @@ class ContohController extends Controller
             'stok'=>'Required|numeric',
             'harga_beli'=>'Required|numeric',
             'harga_jual'=>'Required|numeric',
+            'gambar' => 'image|mimes:jpg,jpe,png|max:20488'
 
-        ]);
+        ],
+        [
+            'gambar.max' => 'Ukuran Gambar Maksimal 2MB'
+            ]
+    );
+    $file = null;
+    if($request->hasFile('gambar'))
+    {
+        $file = time() . '-' . $request->gambar->getClientOriginalName();
+        $request->gambar->move(public_path('uploads/barang'),$file);
+    }
 
-        Barang::create($request->all());
+        Barang::create(
+            [
+                'gambar' => $file,
+                'kode_barang' => $request->kode_barang,
+                'nama_barang' => $request->nama_barang,
+                'stok' => $request->stok,
+                'harga_beli' => $request->harga_beli,
+                'harga_jual' => $request->harga_jual,
+            ]
+        );
 
         return redirect()->route('barang.index')->with('succes','Barang Berhasil Ditambahkan');
     }

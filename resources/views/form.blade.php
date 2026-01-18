@@ -12,11 +12,15 @@
             {{ isset($barang) ? 'Edit Barang' : 'Tambah Barang' }}
         </h1>
 
-        <form action="{{ isset($barang) ? route('barang.update', $barang->id) : route('barang.store') }}" method="POST">
+        <form action="{{ isset($barang) ? route('barang.update', $barang->id) : route('barang.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
             @if(isset($barang))
             @method('PUT')
             @endif
+            <div class="mb-4">
+                <label class="block mb-1 font-semibold">Gambar</label>
+                <input type="file" name="gambar" class="w-full border-gray-300 rounded-lg p-2 shadow-sm" required>
+            </div>
             <div class="mb-4">
                 <label class="block mb-1 font-semibold">Kode Barang</label>
                 <input type="text" name="kode_barang" class="w-full border-gray-300 rounded-lg p-2 shadow-sm" value="{{ old('kode_barang',$barang->kode_barang ?? '') }}" required>
