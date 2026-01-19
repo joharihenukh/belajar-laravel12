@@ -12,6 +12,12 @@
             <h1 class="text-2x1 font-bold">
                 Data Barang
             </h1>
+            <div class="mb-4 flex justify-betwen items-center">
+                <form action="{{route('barang.index')}}" method="GET" class="flex gap-2">
+                    <input type="text" name="search" value="{{request('search')}}" placeholder="car kode Barang/Nama...." class="border rounded-lg px-4 py-2 w-64 focus:outline-none focus:ring focus:border-blue-300">
+                    <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg">Cari</button>
+                </form>
+            </div>
             <a href="{{ route('barang.create')}}" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-ig nado">
                 + Tambah Data
             </a>
@@ -39,8 +45,8 @@
                         <span class="text-muted">-</span>
                         @endif
                     </td>
-                    <td class="p-3">{{ $barang->nama_barang }}</td>
                     <td class="p-3">{{ $barang->kode_barang }}</td>
+                    <td class="p-3">{{ $barang->nama_barang }}</td>
                     <td class="p-3">{{ $barang['stok'] }}</td>
                     <td class="p-3">Rp {{ number_format ( $barang->harga_beli)}}</td>
                     <td class="p-3">Rp {{ number_format ( $barang['harga_jual'])}}</td>
